@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # dashboard_app
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# inventory_flutter_app
+flutter application that saves your inventory 
+>>>>>>> 5c10e9f6af5d71b8c611e29da2eba22aed95e10e

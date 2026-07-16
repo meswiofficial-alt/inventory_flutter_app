@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: const Color.fromARGB(255, 208, 21, 21),
       initialRoute: '/',
       routes: {
         '/Dashboard': (context) => const DashboardPage(),
