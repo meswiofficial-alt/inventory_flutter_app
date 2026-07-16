@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard_app/views/dashboard.dart';
-import 'package:dashboard_app/views/registration.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Card(
               elevation: 6,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(24),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(28.0),
@@ -34,15 +34,14 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // Logo / Title
-                    Image.asset(
-                      'assets/images/daystarlogo.png',
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.contain,
+                    const Icon(
+                      Icons.person_add_alt_1,
+                      size: 60,
+                      color: Colors.blue,
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Welcome Back',
+                      'Create Account',
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -51,11 +50,25 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 6),
                     const Text(
-                      'Sign in to continue',
+                      'Join us today!',
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 28),
+
+                    // Name field
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'John Doe',
+                        prefixIcon: const Icon(Icons.person_outline),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
 
                     // Email field
                     TextField(
@@ -96,24 +109,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
 
-                    // Forgot password (dummy)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text('Forgot password?'),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-
-                    // Login button
+                    // Register button
                     ElevatedButton(
                       onPressed: () {
-                        // Simple validation: if both fields are non-empty, navigate
-                        if (_emailController.text.isNotEmpty &&
+                        // Simple validation
+                        if (_nameController.text.isNotEmpty &&
+                            _emailController.text.isNotEmpty &&
                             _passwordController.text.isNotEmpty) {
+                          // Simulate registration success -> go to dashboard
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -136,27 +141,22 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       child: const Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                     const SizedBox(height: 16),
 
-                    // Register navigation
+                    // Back to login
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account?"),
+                        const Text("Already have an account?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const RegisterPage(),
-                              ),
-                            );
+                            Navigator.pop(context);
                           },
-                          child: const Text('Register'),
+                          child: const Text('Login'),
                         ),
                       ],
                     ),
