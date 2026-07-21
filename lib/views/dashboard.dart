@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard_app/views/add_inventory.dart';
 import 'package:dashboard_app/views/login.dart';
-import 'package:dashboard_app/views/client_reg.dart';
 
-var screens = [DashboardPage(), Inventory(), Client()];
+var screens = [DashboardPage(), Inventory()];
 int position = 0;
 
 class DashboardPage extends StatelessWidget {
@@ -64,14 +63,14 @@ class DashboardPage extends StatelessWidget {
                   children: const [
                     _DashboardCard(
                       icon: Icons.people,
-                      title: 'Users',
-                      value: '0',
+                      title: 'stores',
+                      value: '2',
                       color: Colors.blue,
                     ),
                     _DashboardCard(
                       icon: Icons.inventory_2_rounded,
                       title: 'total inventory',
-                      value: '40',
+                      value: '400',
                       color: Colors.green,
                     ),
                   ],
@@ -80,23 +79,23 @@ class DashboardPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Recent activity (dummy)
+            // Recent activity  with  mock data
             const Text(
-              'Recent Activity',
+              'recent activities',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             const Card(
               child: ListTile(
                 leading: Icon(Icons.notifications_active, color: Colors.blue),
-                title: Text('New user registered'),
+                title: Text('needles added'),
                 subtitle: Text('2 minutes ago'),
               ),
             ),
             const Card(
               child: ListTile(
                 leading: Icon(Icons.shopping_bag, color: Colors.green),
-                title: Text('Order #1234 shipped'),
+                title: Text('guns added'),
                 subtitle: Text('15 minutes ago'),
               ),
             ),

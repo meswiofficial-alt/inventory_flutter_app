@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:dashboard_app/views/login.dart';
 import 'package:dashboard_app/views/dashboard.dart';
-import 'package:dashboard_app/views/client_reg.dart';
+
 import 'package:dashboard_app/views/add_inventory.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/Dashboard': (context) => const DashboardPage(),
-        '/addClient': (context) => const Client(),
+
         '/addInventory': (context) => const Inventory(),
       },
       debugShowCheckedModeBanner: false,
