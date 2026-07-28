@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dashboard_app/views/login.dart';
 import 'package:dashboard_app/views/dashboard.dart';
+import 'package:http/http.dart' as http;
 
 class Inventory extends StatefulWidget {
   final Function(Map<String, dynamic> newItem)? onItemAdded;
@@ -11,6 +12,8 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
+  String _msg = "message from api";
+
   final _formKey = GlobalKey<FormState>();
 
   // Controllers for text fields
@@ -61,6 +64,7 @@ class _InventoryState extends State<Inventory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(237, 3, 12, 28),
       appBar: AppBar(
         title: const Text('inventoryManagement'),
         centerTitle: true,
@@ -124,7 +128,7 @@ class _InventoryState extends State<Inventory> {
 
               // 3. Category Dropdown
               DropdownButtonFormField<String>(
-                value: _selectedCategory,
+                initialValue: _selectedCategory,
                 decoration: const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),
@@ -210,9 +214,26 @@ class _InventoryState extends State<Inventory> {
               ),
               const SizedBox(height: 24),
 
+              ElevatedButton.icon(
+                onPressed: () {
+                  getMsgAPI();
+                },
+                icon: const Icon(Icons.check),
+                label: const Text(
+                  'check api connection',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              Text(
+                _msg,
+                style: TextStyle(fontSize: 50, color: Colors.greenAccent),
+              ),
+
               // Recent activity  with  mock data
               const Text(
-                'recent activities',
+                'recent added',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
@@ -261,5 +282,40 @@ class _InventoryState extends State<Inventory> {
         ],
       ),
     );
+  }
+
+  void getMsgAPI() async {
+    String url = "http://localhost/app1/test.php";
+    final Map<String, dynamic> queryParams = {
+      "name": "melodious",
+      "address": "kenya",
+    };
+    try {
+      http.Response response = await http
+          .get(Uri.parse(url).replace(queryParameters: queryParams))
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          _msg = response.body;
+        });
+      } else {
+        setState(() {
+          _msg = "Error ${response.statusCode}: ${response.reasonPhrase}";
+        });
+      }
+    } on http.ClientException catch (e) {
+      setState(() {
+        _msg = "Connection failed: ${e.message}\n";
+      });
+    } on FormatException catch (e) {
+      setState(() {
+        _msg = "Invalid URL format: ${e.message}";
+      });
+    } catch (e) {
+      setState(() {
+        _msg = "Unexpected error: $e";
+      });
+    }
   }
 }

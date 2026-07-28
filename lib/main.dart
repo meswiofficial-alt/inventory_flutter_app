@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:dashboard_app/views/login.dart';
+import 'package:dashboard_app/views/login.dart';
 import 'package:dashboard_app/views/dashboard.dart';
 
 import 'package:dashboard_app/views/add_inventory.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Roboto',
       ),
-      home: const DashboardPage(),
+      home: const LoginPage(),
     );
   }
 }

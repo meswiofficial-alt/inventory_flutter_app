@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/animation.dart';
 
 class AnimatedSVGContainer extends StatefulWidget {
+  const AnimatedSVGContainer({super.key});
+
   @override
   _AnimatedSVGContainerState createState() => _AnimatedSVGContainerState();
 }
@@ -28,7 +30,7 @@ class _AnimatedSVGContainerState extends State<AnimatedSVGContainer>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
       height: 300,
       child: AnimatedBuilder(

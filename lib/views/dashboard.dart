@@ -3,6 +3,7 @@ import 'package:dashboard_app/views/add_inventory.dart';
 import 'package:dashboard_app/views/login.dart';
 
 var screens = [DashboardPage(), Inventory()];
+
 int position = 0;
 
 class DashboardPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(237, 3, 12, 28),
       appBar: AppBar(
         title: const Text('inventoryManagement'),
         centerTitle: true,
@@ -39,50 +41,81 @@ class DashboardPage extends StatelessWidget {
             // Welcome message
             const Text(
               'welcome to your inventory manager',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              'Here is a quick overview of your stats.',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 24),
 
             // Responsive grid: 2 columns on wide, 1 on narrow
-            LayoutBuilder(
-              builder: (context, constraints) {
-                // If width > 600, use 2 columns, else 1
-                final isWide = constraints.maxWidth > 600;
-                return GridView.count(
-                  crossAxisCount: isWide ? 2 : 1,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 1.2,
-                  children: const [
-                    _DashboardCard(
-                      icon: Icons.people,
-                      title: 'stores',
-                      value: '2',
-                      color: Colors.blue,
-                    ),
-                    _DashboardCard(
-                      icon: Icons.inventory_2_rounded,
-                      title: 'total inventory',
-                      value: '400',
-                      color: Colors.green,
-                    ),
-                  ],
-                );
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: [
+                      _DashboardCard(
+                        icon: Icons.home_filled,
+                        title: 'warehouse',
+                        value: '2',
+                        color: Colors.green,
+                      ),
+
+                      SizedBox(height: 50),
+
+                      _DashboardCard(
+                        icon: Icons.inventory_2_rounded,
+                        title: 'total inventory',
+                        value: '400',
+                        color: Colors.green,
+                      ),
+                      SizedBox(height: 20),
+
+                      _DashboardCard(
+                        icon: Icons.people,
+                        title: 'clients',
+                        value: '15',
+                        color: Colors.blue,
+                      ),
+                      _DashboardCard(
+                        icon: Icons.money_rounded,
+                        title: 'total cash',
+                        value: '400,000',
+                        color: Colors.orange,
+                      ),
+                      // ElevatedButton.icon(
+                      //   onPressed: () => Icons.add_ic_call,
+                      //   style: ElevatedButton.styleFrom(
+                      //     padding: const EdgeInsets.symmetric(vertical: 16),
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //   ),
+                      //   icon: const Icon(Icons.check),
+                      //   label: const Text(
+                      //     'api connection confirmation',
+                      //     style: TextStyle(fontSize: 16),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 24),
 
             // Recent activity  with  mock data
             const Text(
               'recent activities',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             const SizedBox(height: 12),
             const Card(
@@ -121,10 +154,6 @@ class DashboardPage extends StatelessWidget {
             icon: Icon(Icons.add),
             label: 'Add Inventory',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_add_alt_1),
-            label: 'Add customer',
-          ),
         ],
       ),
     );
@@ -151,7 +180,7 @@ class _DashboardCard extends StatelessWidget {
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
